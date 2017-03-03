@@ -5,27 +5,25 @@ const getName = function () {
       return this.name;
     }
   };
-  const getName = obj.getName;
+  const getName = obj.getName();
 
-  return getName();
+  return getName;
 };
 
 const getSequence = function (count) {
   const numberGetters = [];
 
   for (var i = 1; i <= count; i += 1) {
-    numberGetters.push(function() {
-      return i;
-    });
+    numberGetters.push(i);
   }
 
-  return numberGetters.map(numberGetter => numberGetter());
+  return numberGetters;
 };
 
 const getAdults = function (people) {
   return people
-    .filter(person => true)
-    .map(adult => adult.firstName)
+    .filter(person => person.age > 18)
+    .map(adult => adult.firstName + " " + adult.surname)
     .join(', ')
 };
 
@@ -34,11 +32,12 @@ const fetchData = function (userId, callback) {
 
   setTimeout(function() {
     if (Number.isFinite(userId)) {
-      callback(data);
+      callback(null, data);
+    } else {
+      callback(new Error('Bad request'))
     }
-
-    callback(new Error('Bad request'));
   }, 1);
+
 };
 
 module.exports = {

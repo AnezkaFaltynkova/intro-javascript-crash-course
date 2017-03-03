@@ -1,4 +1,4 @@
-const traps = require('./index');
+const traps = require('./../index');
 const expect = require('expect');
 
 describe('Introductory traps', function () {
